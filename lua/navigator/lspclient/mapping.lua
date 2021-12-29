@@ -131,17 +131,17 @@ local function set_mapping(user_opts)
   end
   local fmtkey, rfmtkey
   for _, value in pairs(key_maps) do
-    local f = '<Cmd>lua vim.lsp.buf.' .. value.func .. '<CR>'
+    local f = '<Cmd>silent! lua vim.lsp.buf.' .. value.func .. '<CR>'
     if string.find(value.func, 'require') then
-      f = '<Cmd>lua ' .. value.func .. '<CR>'
+      f = '<Cmd>silent! lua ' .. value.func .. '<CR>'
     elseif string.find(value.func, 'diagnostic') then
-      local diagnostic = '<Cmd>lua vim.'
+      local diagnostic = '<Cmd>silent! lua vim.'
       if vim.lsp.diagnostic ~= nil then
-        diagnostic = '<Cmd>lua vim.lsp.'
+        diagnostic = '<Cmd>silent! lua vim.lsp.'
       end
       f = diagnostic .. value.func .. '<CR>'
     elseif string.find(value.func, 'vim.') then
-      f = '<Cmd>lua ' .. value.func .. '<CR>'
+      f = '<Cmd>silent! lua ' .. value.func .. '<CR>'
     end
     local k = value.key
     local m = value.mode or 'n'
